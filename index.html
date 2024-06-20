@@ -39,9 +39,9 @@
             width: 100%;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
-        /* Custom styles for the Google CSE */
         .gcse-search input.gsc-input {
             background-color: #ff69b4; /* Dark pink */
             color: white;
@@ -49,7 +49,7 @@
             border-radius: 25px 0 0 25px;
             padding: 10px 15px;
             font-size: 18px;
-            width: 75%;
+            flex: 1;
             transition: background-color 0.3s ease;
         }
 
@@ -94,21 +94,20 @@
 <body>
     <div class="search-container" id="search-container">
         <img src="logo.png" alt="DangoSearch Logo">
-        <script async src="https://cse.google.com/cse.js?cx=d572b410fcde64ce5"></script>
-        <div class="gcse-search"></div>
+        <div class="gcse-search">
+            <div class="gcse-search"></div>
+            <script async src="https://cse.google.com/cse.js?cx=d572b410fcde64ce5"></script>
+            <script>
+                google.search.cse.element.render({
+                    div: "search-container",
+                    tag: 'searchresults-only'
+                });
+                google.search.cse.element.getElement('searchresults-only').execute('');
+            </script>
+        </div>
     </div>
 
     <script>
-        (function() {
-            var cx = 'd572b410fcde64ce5';
-            var gcse = document.createElement('script');
-            gcse.type = 'text/javascript';
-            gcse.async = true;
-            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(gcse, s);
-        })();
-
         function onSearchComplete() {
             var searchContainer = document.getElementById('search-container');
             searchContainer.style.position = 'absolute';
@@ -119,14 +118,6 @@
             searchContainer.style.padding = '20px';
             searchContainer.style.boxSizing = 'border-box';
         }
-
-        window.onload = function() {
-            google.search.cse.element.render({
-                div: "searchresults-only",
-                tag: 'searchresults-only'
-            });
-            google.search.cse.element.getElement("searchresults-only").execute('');
-        };
 
         window.__gcse = {
             callback: onSearchComplete

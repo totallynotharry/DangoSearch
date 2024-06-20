@@ -9,27 +9,59 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f9f9f9;
+            background-color: #2e2e2e; /* Dark background for better contrast */
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
         }
 
         .search-container {
             text-align: center;
-            background: #ffffff;
+            background: #333; /* Slightly lighter background for the container */
             padding: 40px 60px;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 80%;
             width: 100%;
         }
 
         .search-container img {
             width: 150px;
             margin-bottom: 30px;
+        }
+
+        .gcse-search {
+            width: 100%;
+        }
+
+        /* Custom styles for the Google CSE */
+        .gcse-search input.gsc-input {
+            background-color: #ff69b4; /* Dark pink */
+            color: white;
+        }
+
+        .gcse-search input.gsc-search-button {
+            background-color: #ffeb3b; /* Yellow */
+            color: #333;
+        }
+
+        .gcse-search .gsc-control-cse .gsc-table-result {
+            background-color: #4caf50; /* Green */
+            color: white;
+        }
+
+        .gcse-search .gsc-control-cse .gs-title,
+        .gcse-search .gsc-control-cse .gs-snippet {
+            color: white;
+        }
+
+        .gcse-search .gsc-control-cse .gs-visibleUrl,
+        .gcse-search .gsc-control-cse .gs-visibleUrl-short {
+            color: #ffeb3b; /* Yellow for URLs */
         }
     </style>
 </head>
@@ -39,5 +71,23 @@
         <script async src="https://cse.google.com/cse.js?cx=d572b410fcde64ce5"></script>
         <div class="gcse-search"></div>
     </div>
+
+    <script>
+        (function() {
+            var cx = 'd572b410fcde64ce5';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+
+        // Ensure the search results fill the screen
+        window.onload = function() {
+            var searchContainer = document.querySelector('.search-container');
+            searchContainer.style.minHeight = window.innerHeight + 'px';
+        };
+    </script>
 </body>
 </html>

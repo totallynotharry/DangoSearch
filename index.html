@@ -27,7 +27,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             max-width: 600px;
             width: 100%;
-            transition: all 0.3s ease;
+            overflow-y: auto; /* Enable vertical scrolling */
+            max-height: calc(100vh - 100px); /* Adjust max-height based on your layout */
         }
 
         .search-container img {
@@ -40,6 +41,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column; /* Stack items vertically */
+            margin-top: 20px;
         }
 
         .gcse-search input.gsc-input {
@@ -51,6 +54,8 @@
             font-size: 18px;
             flex: 1;
             transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 400px;
         }
 
         .gcse-search input.gsc-input:hover, .gcse-search input.gsc-input:focus {
@@ -78,6 +83,9 @@
             color: white;
             border-radius: 12px;
             padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .gcse-search .gsc-control-cse .gs-title,
@@ -92,36 +100,19 @@
     </style>
 </head>
 <body>
-    <div class="search-container" id="search-container">
+    <div class="search-container">
         <img src="logo.png" alt="DangoSearch Logo">
         <div class="gcse-search">
             <div class="gcse-search"></div>
             <script async src="https://cse.google.com/cse.js?cx=d572b410fcde64ce5"></script>
             <script>
                 google.search.cse.element.render({
-                    div: "search-container",
+                    div: "searchresults-only",
                     tag: 'searchresults-only'
                 });
                 google.search.cse.element.getElement('searchresults-only').execute('');
             </script>
         </div>
     </div>
-
-    <script>
-        function onSearchComplete() {
-            var searchContainer = document.getElementById('search-container');
-            searchContainer.style.position = 'absolute';
-            searchContainer.style.top = '0';
-            searchContainer.style.left = '0';
-            searchContainer.style.width = '100%';
-            searchContainer.style.height = '100%';
-            searchContainer.style.padding = '20px';
-            searchContainer.style.boxSizing = 'border-box';
-        }
-
-        window.__gcse = {
-            callback: onSearchComplete
-        };
-    </script>
 </body>
 </html>

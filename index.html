@@ -97,14 +97,32 @@
         .gcse-search .gsc-control-cse .gs-visibleUrl-short {
             color: #ffeb3b; /* Yellow for URLs */
         }
+
+        /* Hide scrollbars */
+        /* For WebKit browsers */
+        .search-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* For Firefox */
+        .search-container {
+            scrollbar-width: none;
+        }
+
+        /* For Edge */
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            .search-container {
+                -ms-overflow-style: none;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="search-container">
         <img src="logo.png" alt="DangoSearch Logo">
         <div class="gcse-search">
-            <div class="gcse-search"></div>
             <script async src="https://cse.google.com/cse.js?cx=d572b410fcde64ce5"></script>
+            <div class="gcse-search"></div>
             <script>
                 google.search.cse.element.render({
                     div: "searchresults-only",

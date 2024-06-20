@@ -9,7 +9,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #2e2e2e; /* Dark background for better contrast */
+            background-color: #2e2e2e;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -21,12 +21,13 @@
 
         .search-container {
             text-align: center;
-            background: #333; /* Slightly lighter background for the container */
+            background: #333;
             padding: 40px 60px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             max-width: 80%;
             width: 100%;
+            transition: all 0.3s ease;
         }
 
         .search-container img {
@@ -36,22 +37,47 @@
 
         .gcse-search {
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         /* Custom styles for the Google CSE */
         .gcse-search input.gsc-input {
             background-color: #ff69b4; /* Dark pink */
             color: white;
+            border: none;
+            border-radius: 25px 0 0 25px;
+            padding: 10px 15px;
+            font-size: 18px;
+            width: 75%;
+            transition: background-color 0.3s ease;
+        }
+
+        .gcse-search input.gsc-input:hover, .gcse-search input.gsc-input:focus {
+            background-color: #ff1493; /* Darker pink on focus */
+            outline: none;
         }
 
         .gcse-search input.gsc-search-button {
             background-color: #ffeb3b; /* Yellow */
             color: #333;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .gcse-search input.gsc-search-button:hover {
+            background-color: #fdd835; /* Darker yellow on hover */
         }
 
         .gcse-search .gsc-control-cse .gsc-table-result {
             background-color: #4caf50; /* Green */
             color: white;
+            border-radius: 12px;
+            padding: 20px;
         }
 
         .gcse-search .gsc-control-cse .gs-title,
@@ -66,7 +92,7 @@
     </style>
 </head>
 <body>
-    <div class="search-container">
+    <div class="search-container" id="search-container">
         <img src="logo.png" alt="DangoSearch Logo">
         <script async src="https://cse.google.com/cse.js?cx=d572b410fcde64ce5"></script>
         <div class="gcse-search"></div>
@@ -83,10 +109,27 @@
             s.parentNode.insertBefore(gcse, s);
         })();
 
-        // Ensure the search results fill the screen
+        function onSearchComplete() {
+            var searchContainer = document.getElementById('search-container');
+            searchContainer.style.position = 'absolute';
+            searchContainer.style.top = '0';
+            searchContainer.style.left = '0';
+            searchContainer.style.width = '100%';
+            searchContainer.style.height = '100%';
+            searchContainer.style.padding = '20px';
+            searchContainer.style.boxSizing = 'border-box';
+        }
+
         window.onload = function() {
-            var searchContainer = document.querySelector('.search-container');
-            searchContainer.style.minHeight = window.innerHeight + 'px';
+            google.search.cse.element.render({
+                div: "searchresults-only",
+                tag: 'searchresults-only'
+            });
+            google.search.cse.element.getElement("searchresults-only").execute('');
+        };
+
+        window.__gcse = {
+            callback: onSearchComplete
         };
     </script>
 </body>

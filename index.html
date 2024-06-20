@@ -31,54 +31,13 @@
             width: 150px;
             margin-bottom: 30px;
         }
-
-        .search-container input[type="text"] {
-            width: calc(100% - 24px);
-            padding: 15px 12px;
-            font-size: 18px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .search-container input[type="text"]:focus {
-            border-color: #0078d7;
-            box-shadow: 0 0 8px rgba(0, 120, 215, 0.3);
-        }
-
-        .search-container input[type="submit"] {
-            padding: 15px 25px;
-            font-size: 18px;
-            color: #ffffff;
-            background-color: #0078d7;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .search-container input[type="submit"]:hover {
-            background-color: #005bb5;
-        }
     </style>
 </head>
 <body>
     <div class="search-container">
-        <img src="logo.svg" alt="DangoSearch Logo">
-        <form id="searchForm">
-            <input type="text" id="searchInput" placeholder="Type something..." required>
-            <input type="submit" value="Search">
-        </form>
+        <img src="logo.png" alt="DangoSearch Logo">
+        <script async src="https://cse.google.com/cse.js?cx=d572b410fcde64ce5"></script>
+        <div class="gcse-search"></div>
     </div>
-
-    <script>
-        document.getElementById('searchForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var query = document.getElementById('searchInput').value;
-            window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-        });
-    </script>
 </body>
 </html>
